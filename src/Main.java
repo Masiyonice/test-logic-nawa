@@ -56,17 +56,16 @@ public class Main {
         int temp = 0;
         int bus = 0;
         for (int i = 0; i < input; i++) {
-            if(fam > 0){
+            if(fam >= 0){
                 if(max > 0){
                     if((arr[i]+temp)>max){
                         temp += (arr[i] - max);
                         max = 0;
+                        bus++;
                     }else {
                         max -= (arr[i])+temp;
-                        temp = 0;
-                        bus++;
                     }
-                    System.out.println(i + " 1. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
+//                    System.out.println(i + " 1. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
                 }else {
                     fam = 2;
                     max = 4;
@@ -81,12 +80,15 @@ public class Main {
                         max -= (arr[i])+temp;
                         temp = 0;
                     }
-                    System.out.println(i + " 2. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
+//                    System.out.println(i + " 2. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
                 }
             }else {
                 fam = 2;
                 max = 4;
                 bus++;
+                if(temp != 0){
+                    fam--;
+                }
                 if((arr[i]+temp)>max){
                     temp += (arr[i] - max);
                     max = 0;
@@ -94,16 +96,19 @@ public class Main {
                     max -= (arr[i])+temp;
                     temp = 0;
                 }
-                System.out.println(i + " 3. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
+//                System.out.println(i + " 3. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
             }
             fam--;
+        }
+        if(temp > 0){
+            bus++;
         }
         return bus;
     }
 
     public static void main(String[] args) {
-//        filterText("Sample Case");
-//        filterText("Next Case");
+        filterText("Sample Case");
+        filterText("Next Case");
         Integer[] input = new Integer[]{2,3,4,4,2,1,3,1};
         Integer test = needBus(8,input);
         System.out.println(test);
