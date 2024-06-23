@@ -57,37 +57,44 @@ public class Main {
         int bus = 0;
         for (int i = 0; i < input; i++) {
             if(fam > 0){
-                if(max > 0) {
-                    if((arr[i]+temp) > max){
-                        temp = arr[i] + temp - max;
+                if(max > 0){
+                    if((arr[i]+temp)>max){
+                        temp += (arr[i] - max);
                         max = 0;
                     }else {
-                        max -= (arr[i]+temp);
+                        max -= (arr[i])+temp;
+                        temp = 0;
+                        bus++;
                     }
-                    System.out.println(i +" "+"1. sisa kursi "+max+" sisa orang " + temp);
+                    System.out.println(i + " 1. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
                 }else {
-                    max = 4;
                     fam = 2;
-                    if((arr[i]+temp) > max){
-                        temp = arr[i] + temp - max;
+                    max = 4;
+                    bus++;
+                    if(temp != 0){
+                        fam--;
+                    }
+                    if((arr[i]+temp)>max){
+                        temp += (arr[i] - max);
                         max = 0;
                     }else {
-                        max -= (arr[i]+temp);
+                        max -= (arr[i])+temp;
+                        temp = 0;
                     }
-                    System.out.println(i +" "+"2. sisa kursi "+max+" sisa orang " + temp);
-                    bus++;
+                    System.out.println(i + " 2. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
                 }
             }else {
-                max = 4;
                 fam = 2;
-                if((arr[i]+temp) > max){
-                    temp = arr[i] + temp - max;
+                max = 4;
+                bus++;
+                if((arr[i]+temp)>max){
+                    temp += (arr[i] - max);
                     max = 0;
                 }else {
-                    max -= (arr[i]+temp);
+                    max -= (arr[i])+temp;
+                    temp = 0;
                 }
-                System.out.println(i +" "+"3. sisa kursi "+max+" sisa orang " + temp);
-                bus++;
+                System.out.println(i + " 3. sisa kursi "+ max+ " sisa orang "+ temp + " bus "+ bus);
             }
             fam--;
         }
@@ -100,8 +107,8 @@ public class Main {
         Integer[] input = new Integer[]{2,3,4,4,2,1,3,1};
         Integer test = needBus(8,input);
         System.out.println(test);
-//        Integer[] input2 = new Integer[]{1,2,4,3,3};
-//        Integer test2 = needBus(5,input2);
-//        System.out.println(test2);
+        Integer[] input2 = new Integer[]{1,2,4,3,3};
+        Integer test2 = needBus(5,input2);
+        System.out.println(test2);
     }
 }
