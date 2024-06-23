@@ -46,16 +46,62 @@ public class Main {
         System.out.println("\n");
     }
 
-    public static Integer needBus(int input, Integer[] arr){
+    public static Integer needBus(Integer input, Integer[] arr){
         if(input != arr.length){
+
             return 0;
         }
-
-        return 1;
+        int fam = 2;
+        int max = 4;
+        int temp = 0;
+        int bus = 0;
+        for (int i = 0; i < input; i++) {
+            if(fam > 0){
+                if(max > 0) {
+                    if((arr[i]+temp) > max){
+                        temp = arr[i] + temp - max;
+                        max = 0;
+                    }else {
+                        max -= (arr[i]+temp);
+                    }
+                    System.out.println(i +" "+"1. sisa kursi "+max+" sisa orang " + temp);
+                }else {
+                    max = 4;
+                    fam = 2;
+                    if((arr[i]+temp) > max){
+                        temp = arr[i] + temp - max;
+                        max = 0;
+                    }else {
+                        max -= (arr[i]+temp);
+                    }
+                    System.out.println(i +" "+"2. sisa kursi "+max+" sisa orang " + temp);
+                    bus++;
+                }
+            }else {
+                max = 4;
+                fam = 2;
+                if((arr[i]+temp) > max){
+                    temp = arr[i] + temp - max;
+                    max = 0;
+                }else {
+                    max -= (arr[i]+temp);
+                }
+                System.out.println(i +" "+"3. sisa kursi "+max+" sisa orang " + temp);
+                bus++;
+            }
+            fam--;
+        }
+        return bus;
     }
 
     public static void main(String[] args) {
-        filterText("Sample Case");
-        filterText("Next Case");
+//        filterText("Sample Case");
+//        filterText("Next Case");
+        Integer[] input = new Integer[]{2,3,4,4,2,1,3,1};
+        Integer test = needBus(8,input);
+        System.out.println(test);
+//        Integer[] input2 = new Integer[]{1,2,4,3,3};
+//        Integer test2 = needBus(5,input2);
+//        System.out.println(test2);
     }
 }
